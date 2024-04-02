@@ -13,7 +13,7 @@ Welcome to the **Cards and Transactions Overview** application! This project pro
 ## Installation
 1. Clone the repository to your local machine:
    ```bash
-   git clone <repository-url>
+   git clone [<repository-url>](https://github.com/m89mihaella/web-cards-transactions.git)
    ```
 2. Navigate to the project directory:
    ```bash

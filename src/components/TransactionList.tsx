@@ -4,6 +4,7 @@ import { Transaction } from "../types/types";
 import { getTransactions } from "../services/apiClient";
 import { colors, fonts, fontSizes } from "../theme";
 
+
 interface TransactionListProps {
   cardId: string;
   filterAmount: number;
@@ -41,8 +42,23 @@ const TransactionAmount = styled.span`
   color: ${colors.fontColor};
 `;
 
+//This approach helps reduce code duplication and ensures consistency in styling across components.
+
+/*const TransactionText = styled.span`
+  font-size: ${fontSizes.body};
+  font-family: ${fonts.secondary};
+  color: ${colors.fontColor};
+`;
+
+const TransactionDescription = styled(TransactionText)``;
+
+const TransactionAmount = styled(TransactionText)``;*/
+
+
 const TransactionList: React.FC<TransactionListProps> = ({ cardId, filterAmount, cardBackgroundColor }) => {
+
   const [transactions, setTransactions] = useState<Transaction[]>([]);
+  
 
   useEffect(() => {
     async function fetchTransactions() {
@@ -54,12 +70,12 @@ const TransactionList: React.FC<TransactionListProps> = ({ cardId, filterAmount,
     }
   }, [cardId]);
 
+
   const filteredTransactions = transactions.filter((transaction) => transaction.amount >= filterAmount);
 
   return (
     <>
       {cardId ? (
-        <>
           <TransactionListUl>
             {filteredTransactions.map((transaction) => (
               <TransactionItem key={transaction.id} backgroundColor={cardBackgroundColor}>
@@ -68,7 +84,6 @@ const TransactionList: React.FC<TransactionListProps> = ({ cardId, filterAmount,
               </TransactionItem>
             ))}
           </TransactionListUl>
-        </>
       ) : null}
     </>
   );

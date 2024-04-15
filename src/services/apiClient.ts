@@ -1,7 +1,10 @@
 import { Card, Transaction } from "../types/types";
 
-export async function getCards(): Promise<Card[]> {
+export async function getCards(): Promise<Card[] | []> {
   const cards = await import("../data/cards.json");
+  if (!cards) {
+    return [];
+  } 
   return cards.default;
 }
 

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { fonts, fontSizes, colors } from "../theme";
 
 interface FilterInputProps {
+  cardId: string;
   value: number;
   onChange: (value: number) => void;
 }
@@ -34,16 +35,22 @@ const Input = styled.input`
   }
 `;
 
-const FilterInput: React.FC<FilterInputProps> = ({ value, onChange }) => {
+const FilterInput: React.FC<FilterInputProps> = ({ value, onChange, cardId }) => {
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
     onChange(parseFloat(e.target.value));
   };
 
   return (
-    <InputContainer>
-      <Label>Amount Filter</Label>
-      <Input type="number" value={value || ""} onChange={handleInputChange} placeholder="Amount" />
-    </InputContainer>
+    <>
+      {cardId  ? (
+        <InputContainer >
+          <Label>Amount Filter</Label>
+          <Input type="number" value={value || ""} onChange={handleInputChange} placeholder="Amount" />
+        </InputContainer>
+      ) : null}
+    </>
   );
 };
 

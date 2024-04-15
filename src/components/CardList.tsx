@@ -8,7 +8,7 @@ interface CardListProps {
   onSelectCard: (cardId: string, backgroundColor: string) => void;
 }
 
-const Container = styled.div`
+const Container = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -46,14 +46,25 @@ const CardDescription = styled.p`
   font-family: ${fonts.secondary};
   padding: 0.5rem;
 `;
-
+//const errorMessage = styled.p`
 const CardList: React.FC<CardListProps> = ({ onSelectCard }) => {
   const [cards, setCards] = useState<Card[]>([]);
+  // const [error, setError] = useState<string | null>(null);
+  // cont [loading seLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    //firrst try to fetch the cards and then to catch an error if its the case. we can display the error in a <p>
+    //in the catch after catching the error we set the setError to the error message
     async function fetchCards() {
-      const fetchedCards = await getCards();
-      setCards(fetchedCards);
+      try {
+        const fetchedCards = await getCards();
+        setCards(fetchedCards);
+
+      }
+      catch {
+       
+      
+      }
     }
     fetchCards();
   }, []);
@@ -76,6 +87,7 @@ const CardList: React.FC<CardListProps> = ({ onSelectCard }) => {
           );
         })}
       </CardListUl>
+
     </Container>
   );
 };

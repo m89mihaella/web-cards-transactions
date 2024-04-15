@@ -27,13 +27,23 @@ const App: React.FC = () => {
   const [filterAmount, setFilterAmount] = useState<number>(0);
   const [cardBackgroundColor, setCardBackgroundColor] = useState<string>("");
 
+
+  const cardBackgroundColors: Record<string, string> = {
+      "lkmfkl-mlfkm-dlkfm": colors.private,
+    "elek-n3lk-4m3lk4": colors.business,
+      
+    };
+    /*const cardBackgroundColors: Record<string, string[]> = {
+  [colors.private]: ["lkmfkl-mlfkm-dlkfm", "erem-n3lk-4m3lk4"],
+  [colors.business]: ["elek-n3lk-4m3lk4"],
+  // In case we would need to add more colors in the future, we can easily extend the object with new key-value pairs.
+};*/
+
   const handleSelectCard = (cardId: string) => {
     setSelectedCard(cardId);
     setFilterAmount(0);
-    const cardBackgroundColors: Record<string, string> = {
-      "lkmfkl-mlfkm-dlkfm": colors.private,
-      "elek-n3lk-4m3lk4": colors.business,
-    };
+
+  
     const backgroundColor = cardBackgroundColors[cardId] || colors.private;
     setCardBackgroundColor(backgroundColor);
   };
@@ -42,8 +52,8 @@ const App: React.FC = () => {
     <Container>
       <Title>Card and Transactions Overview</Title>
       <CardList onSelectCard={handleSelectCard} />
-      <FilterInput value={filterAmount} onChange={setFilterAmount} />
-      {selectedCard && <TransactionList cardId={selectedCard} filterAmount={filterAmount} cardBackgroundColor={cardBackgroundColor} />}
+      <FilterInput value={filterAmount} onChange={setFilterAmount} cardId={selectedCard} />
+      <TransactionList cardId={selectedCard} filterAmount={filterAmount} cardBackgroundColor={cardBackgroundColor} />
     </Container>
   );
 };
